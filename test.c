@@ -28,7 +28,7 @@ __attribute__((naked, section(".isr_vector"))) void vectors() {
 extern void _start();
 
 void Reset_Handler() {
-    _start();
+	asm volatile ( "b  _start" );
 }
 void Default_Handler() {
     while(1);
@@ -65,6 +65,17 @@ const RPMessage_ResourceTable gRPMessage_linuxResourceTable __attribute__ ((sect
 };
 
 const char* msg = "Hello world!\n";
+#if 0
+void strcpy (char *a, const char *b)
+{
+	char *_a = a;
+	while (b[0]) {
+		*_a = *b;
+		a++;
+		b++;
+	}
+}
+#endif
 
 int main() {
     strcpy(gDebugMemLog, msg);
