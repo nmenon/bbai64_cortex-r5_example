@@ -15,13 +15,17 @@ ifeq ($(ARCH),r5)
 	CFLAGS += -mcpu=cortex-r5
 endif
 
+ifeq ($(ARCH),m4f)
+	CFLAGS += -mcpu=cortex-m4
+endif
+
 all: $(APP)
 
 clean:
 	rm -f $(APP)
 
-$(APP): $(APP_SOURCES) gcc.ld
-	$(CROSS_CC) $(CFLAGS) -Og --specs=nosys.specs --specs=nano.specs -T gcc.ld -o $(APP) $(APP_SOURCES)
+$(APP): $(APP_SOURCES) gcc-$(ARCH).ld
+	$(CROSS_CC) $(CFLAGS) -Og --specs=nosys.specs --specs=nano.specs -T gcc-$(ARCH).ld -o $(APP) $(APP_SOURCES)
 	$(CROSS_SIZE) $(APP)
 	$(CROSS_OBJDUMP) -xd $(APP) > $(APP).lst
 	# sudo cp $(APP) /lib/firmware/
