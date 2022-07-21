@@ -6,7 +6,7 @@
  *   RAM.LENGTH: length of RAM bank 0
  */
 
- __DDR_START__ = 0xA6000000;
+ __DDR_START__ = 0x9cb00000;
 
 MEMORY
 {
